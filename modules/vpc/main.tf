@@ -21,7 +21,7 @@ resource "aws_subnet" "private_1" {
 
 resource "aws_vpc_endpoint" "ssm" {
   vpc_id            = aws_vpc.main.id
-  service_name      = "com.amazonaws.ap-northeast-1.ssm"
+  service_name      = "com.amazonaws.us-east-1.ssm"
   vpc_endpoint_type = "Interface"
 
   security_group_ids  = [var.security_group_vpc_endpoint]
@@ -31,7 +31,7 @@ resource "aws_vpc_endpoint" "ssm" {
 
 resource "aws_vpc_endpoint" "ssmmessages" {
   vpc_id            = aws_vpc.main.id
-  service_name      = "com.amazonaws.ap-northeast-1.ssmmessages"
+  service_name      = "com.amazonaws.us-east-1.ssmmessages"
   vpc_endpoint_type = "Interface"
 
   security_group_ids  = [var.security_group_vpc_endpoint]
@@ -41,7 +41,7 @@ resource "aws_vpc_endpoint" "ssmmessages" {
 
 resource "aws_vpc_endpoint" "ec2messages" {
   vpc_id            = aws_vpc.main.id
-  service_name      = "com.amazonaws.ap-northeast-1.ec2messages"
+  service_name      = "com.amazonaws.us-east-1.ec2messages"
   vpc_endpoint_type = "Interface"
 
   security_group_ids  = [var.security_group_vpc_endpoint]
