@@ -10,12 +10,20 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "role" {
-  name               = "ForEC2"
+  name               = "EC2"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
+
+  tags = {
+    Name = "tf-example-iam-role-ec2"
+  }
 }
 
 data "aws_iam_policy" "systems_manager" {
   arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+
+  tags = {
+    Name = "tf-example-iam-policy-systems-manager"
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "default" {
@@ -26,4 +34,8 @@ resource "aws_iam_role_policy_attachment" "default" {
 resource "aws_iam_instance_profile" "systems_manager" {
   name = "MyInstanceProfile"
   role = aws_iam_role.role.name
+
+  tags = {
+    Name = "tf-example-iam-instance-profile-system-manager"
+  }
 }

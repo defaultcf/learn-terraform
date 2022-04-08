@@ -12,6 +12,10 @@ resource "aws_security_group" "vpc_endpoint" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = {
+    Name = "tf-example-vpc-endpoint-sg"
+  }
 }
 
 resource "aws_security_group" "alb" {
@@ -31,6 +35,10 @@ resource "aws_security_group" "alb" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "tf-example-alb-sg"
   }
 }
 
@@ -57,5 +65,9 @@ resource "aws_security_group" "app_server" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "tf-example-app-server-sg"
   }
 }

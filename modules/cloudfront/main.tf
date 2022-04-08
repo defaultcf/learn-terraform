@@ -2,13 +2,13 @@ locals {
   origin_id = "alb_web"
 }
 
-data "aws_cloudfront_cache_policy" "caching_optimized" {
-  name = "Managed-CachingOptimized"
-}
-
-data "aws_cloudfront_origin_request_policy" "all_viewer" {
-  name = "Managed-AllViewer"
-}
+#data "aws_cloudfront_cache_policy" "caching_optimized" {
+#  name = "Managed-CachingOptimized"
+#}
+#
+#data "aws_cloudfront_origin_request_policy" "all_viewer" {
+#  name = "Managed-AllViewer"
+#}
 
 resource "aws_cloudfront_distribution" "main" {
   enabled = true
@@ -31,8 +31,16 @@ resource "aws_cloudfront_distribution" "main" {
     allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods         = ["GET", "HEAD"]
 
-    cache_policy_id          = data.aws_cloudfront_cache_policy.caching_optimized.id
-    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
+    #cache_policy_id          = data.aws_cloudfront_cache_policy.caching_optimized.id
+    #origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
   }
 
   viewer_certificate {
@@ -43,5 +51,9 @@ resource "aws_cloudfront_distribution" "main" {
     geo_restriction {
       restriction_type = "none"
     }
+  }
+
+  tags = {
+    Name = "tf-example-cloudfront"
   }
 }

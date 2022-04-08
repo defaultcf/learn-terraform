@@ -63,6 +63,10 @@ resource "aws_route_table" "public_1" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
   }
+
+  tags = {
+    Name = "tf-example-public-1"
+  }
 }
 
 resource "aws_route_table_association" "public_1" {
@@ -95,6 +99,10 @@ resource "aws_route_table" "private_1" {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.main.id
   }
+
+  tags = {
+    Name = "tf-example-private-1"
+  }
 }
 
 resource "aws_route_table_association" "private_1" {
@@ -112,6 +120,10 @@ resource "aws_vpc_endpoint" "ssm" {
   security_group_ids  = [var.vpc_endpoint_sg]
   subnet_ids          = [aws_subnet.private_1.id]
   private_dns_enabled = true
+
+  tags = {
+    Name = "tf-example-vpc-endpoint-ssm"
+  }
 }
 
 resource "aws_vpc_endpoint" "ssmmessages" {
@@ -122,6 +134,10 @@ resource "aws_vpc_endpoint" "ssmmessages" {
   security_group_ids  = [var.vpc_endpoint_sg]
   subnet_ids          = [aws_subnet.private_1.id]
   private_dns_enabled = true
+
+  tags = {
+    Name = "tf-example-vpc-endpoint-ssmmessages"
+  }
 }
 
 resource "aws_vpc_endpoint" "ec2messages" {
@@ -132,4 +148,8 @@ resource "aws_vpc_endpoint" "ec2messages" {
   security_group_ids  = [var.vpc_endpoint_sg]
   subnet_ids          = [aws_subnet.private_1.id]
   private_dns_enabled = true
+
+  tags = {
+    Name = "tf-example-vpc-endpoint-ec2messages"
+  }
 }

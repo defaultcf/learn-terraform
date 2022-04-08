@@ -36,6 +36,10 @@ resource "aws_lb" "main" {
   name            = "tf-example-alb"
   security_groups = [var.alb_sg]
   subnets         = [var.public_1, var.public_2]
+
+  tags = {
+    Name = "tf-example-alb"
+  }
 }
 
 resource "aws_lb_target_group" "main" {
@@ -43,6 +47,10 @@ resource "aws_lb_target_group" "main" {
   vpc_id   = var.vpc
   port     = 80
   protocol = "HTTP"
+
+  tags = {
+    Name = "tf-example-alb-tg"
+  }
 }
 
 resource "aws_lb_target_group_attachment" "app_server_1" {
@@ -66,5 +74,9 @@ resource "aws_lb_listener" "front_end" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.main.arn
+  }
+
+  tags = {
+    Name = "tf-example-alb-listener"
   }
 }
