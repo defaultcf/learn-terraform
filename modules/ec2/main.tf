@@ -8,29 +8,44 @@ data "aws_ami" "latest_amazon_linux" {
   }
 }
 
-resource "aws_instance" "app_server_1" {
-  ami                    = data.aws_ami.latest_amazon_linux.id
-  instance_type          = var.instance_type
-  subnet_id              = var.private_1
-  iam_instance_profile   = var.iam_instance_profile
-  vpc_security_group_ids = [var.app_server_sg]
+resource "aws_launch_configuration" "app_server" {
+  name_prefix                      = "tf-example-app-server"
+  image_id                         = data.aws_ami.latest_amazon_linux.id
+  instance_type                    = var.instance_type
+  iam_instance_profile             = var.iam_instance_profile
+  security_groups                  = [var.app_server_sg]
+  vpc_classic_link_security_groups = []
 
-  tags = {
-    Name = "tf-example-instance_1"
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
-resource "aws_instance" "app_server_2" {
-  ami                    = data.aws_ami.latest_amazon_linux.id
-  instance_type          = var.instance_type
-  subnet_id              = var.private_2
-  iam_instance_profile   = var.iam_instance_profile
-  vpc_security_group_ids = [var.app_server_sg]
+resource "aws_autoscaling_group" "app_server" {
+  name                 = "tf-example-app-server"
+  max_size             = 2
+  min_size             = 1
+  force_delete         = true
+  launch_configuration = aws_launch_configuration.app_server.name
+  vpc_zone_identifier  = [var.private_1, var.private_2]
+  target_group_arns    = [aws_lb_target_group.main.arn]
 
-  tags = {
-    Name = "tf-example-instance_2"
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 30
+    }
+    triggers = []
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "tf-example-app-server"
+    propagate_at_launch = true
   }
 }
+
+# --- ALB ---
 
 resource "aws_lb" "main" {
   name            = "tf-example-alb"
@@ -53,18 +68,10 @@ resource "aws_lb_target_group" "main" {
   }
 }
 
-resource "aws_lb_target_group_attachment" "app_server_1" {
-  target_group_arn = aws_lb_target_group.main.arn
-  target_id        = aws_instance.app_server_1.id
-  port             = 80
+resource "aws_autoscaling_attachment" "app_server" {
+  autoscaling_group_name = aws_autoscaling_group.app_server.id
+  lb_target_group_arn    = aws_lb_target_group.main.arn
 }
-
-resource "aws_lb_target_group_attachment" "app_server_2" {
-  target_group_arn = aws_lb_target_group.main.arn
-  target_id        = aws_instance.app_server_2.id
-  port             = 80
-}
-
 
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.main.arn
