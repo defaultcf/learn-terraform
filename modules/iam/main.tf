@@ -1,4 +1,6 @@
-data "aws_iam_policy_document" "assume_role" {
+# --- EC2 ---
+
+data "aws_iam_policy_document" "ec2" {
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -9,9 +11,9 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
-resource "aws_iam_role" "role" {
+resource "aws_iam_role" "ec2" {
   name               = "EC2"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.ec2.json
 
   tags = {
     Name = "tf-example-iam-role-ec2"
@@ -27,13 +29,13 @@ data "aws_iam_policy" "systems_manager" {
 }
 
 resource "aws_iam_role_policy_attachment" "default" {
-  role       = aws_iam_role.role.name
+  role       = aws_iam_role.ec2.name
   policy_arn = data.aws_iam_policy.systems_manager.arn
 }
 
 resource "aws_iam_instance_profile" "systems_manager" {
   name = "MyInstanceProfile"
-  role = aws_iam_role.role.name
+  role = aws_iam_role.ec2.name
 
   tags = {
     Name = "tf-example-iam-instance-profile-system-manager"
