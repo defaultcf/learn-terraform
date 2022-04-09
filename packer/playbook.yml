@@ -1,0 +1,24 @@
+---
+- name: "Provision Image"
+  hosts: all
+  become: true
+
+  tasks:
+    - name: install httpd
+      package:
+        name: httpd
+        state: present
+    - name: enable httpd
+      systemd:
+        name: httpd.service
+        enabled: true
+    - name: install php7.4
+      command: amazon-linux-extras install -y php7.4
+    - name: copy httpd config
+      copy:
+        src: ./files/vhosts.conf
+        dest: /etc/httpd/conf.d/vhosts.conf
+    - name: set app
+      copy:
+        src: ../wordpress/
+        dest: /var/www/html/
