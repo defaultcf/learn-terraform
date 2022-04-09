@@ -24,7 +24,7 @@ resource "aws_launch_configuration" "app_server" {
 resource "aws_autoscaling_group" "app_server" {
   name                 = "tf-example-app-server"
   max_size             = 2
-  min_size             = 1
+  min_size             = 2
   force_delete         = true
   launch_configuration = aws_launch_configuration.app_server.name
   vpc_zone_identifier  = [var.private_1, var.private_2]
