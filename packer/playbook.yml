@@ -26,17 +26,6 @@
       copy:
         src: ./files/vhosts.conf
         dest: /etc/httpd/conf.d/vhosts.conf
-    - name: set app
-      copy:
-        src: ../wordpress/
-        dest: /var/www/html/
-    - name: composer install
-      shell:
-        chdir: /var/www/html
-        cmd: |
-          chown -R ec2-user:apache . && \
-          chmod -R 775 . && \
-          /usr/local/bin/composer install
 
     - name: install CodeDeploy agent
       shell: |

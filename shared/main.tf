@@ -18,17 +18,17 @@ module "vpc" {
 }
 
 module "ec2" {
-  source        = "../../modules/ec2"
-  region        = local.region
-  vpc           = module.vpc.vpc
-  private_1     = module.vpc.subnet_private_1
-  private_2     = module.vpc.subnet_private_2
-  public_1      = module.vpc.subnet_public_1
-  public_2      = module.vpc.subnet_public_2
-  alb_sg        = module.security_group.alb
-  app_server_sg = module.security_group.app_server
-  s3_codepipeline      = module.s3.codepipeline
-  s3_codepipeline_arn  = module.s3.codepipeline_arn
+  source              = "../../modules/ec2"
+  region              = local.region
+  vpc                 = module.vpc.vpc
+  private_1           = module.vpc.subnet_private_1
+  private_2           = module.vpc.subnet_private_2
+  public_1            = module.vpc.subnet_public_1
+  public_2            = module.vpc.subnet_public_2
+  alb_sg              = module.security_group.alb
+  app_server_sg       = module.security_group.app_server
+  s3_codepipeline     = module.s3.codepipeline
+  s3_codepipeline_arn = module.s3.codepipeline_arn
 }
 
 module "cloudfront" {
