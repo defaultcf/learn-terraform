@@ -1,3 +1,7 @@
+variable "region" {
+  type = string
+}
+
 variable "vpc" {
   type = string
 }
@@ -28,5 +32,13 @@ variable "alb_sg" {
 }
 
 variable "app_server_sg" {
+  type = string
+}
+
+variable "s3_codepipeline" {
+  type = string
+}
+
+variable "s3_codepipeline_arn" {
   type = string
 }
