@@ -12,7 +12,7 @@ resource "aws_launch_configuration" "app_server" {
   name_prefix                      = "tf-example-app-server"
   image_id                         = data.aws_ami.latest_amazon_linux.id
   instance_type                    = var.instance_type
-  iam_instance_profile             = var.iam_instance_profile
+  iam_instance_profile             = aws_iam_instance_profile.systems_manager.name
   security_groups                  = [var.app_server_sg]
   vpc_classic_link_security_groups = []
 

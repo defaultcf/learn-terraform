@@ -1,3 +1,7 @@
+output "iam_role_ec2_arn" {
+  value = aws_iam_role.ec2.arn
+}
+
 output "alb_dns_name" {
   value = aws_lb.main.dns_name
 }
