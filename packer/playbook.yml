@@ -11,6 +11,7 @@
         name:
           - httpd
           - php-xml
+          - ruby
         state: present
     - name: enable httpd
       systemd:
@@ -36,3 +37,9 @@
           chown -R ec2-user:apache . && \
           chmod -R 775 . && \
           /usr/local/bin/composer install
+
+    - name: install CodeDeploy agent
+      shell: |
+        curl -L -o /tmp/codedeploy-install https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install && \
+        chmod +x /tmp/codedeploy-install && \
+        /tmp/codedeploy-install auto

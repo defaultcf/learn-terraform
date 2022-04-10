@@ -69,6 +69,17 @@ data "aws_iam_policy_document" "codepipeline_policy" {
     ]
     resources = ["*"]
   }
+
+  statement {
+    actions = [
+      "codedeploy:CreateDeployment",
+      "codedeploy:GetApplicationRevision",
+      "codedeploy:GetDeployment",
+      "codedeploy:GetDeploymentConfig",
+      "codedeploy:RegisterApplicationRevision"
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role" "codepipeline" {
@@ -83,4 +94,3 @@ resource "aws_iam_role" "codepipeline" {
     Name = "tf-example-iam-role-codepipeline"
   }
 }
-
