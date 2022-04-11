@@ -1,9 +1,9 @@
-locals {
-  timestamp = replace(timestamp(), "/T.*Z/", "")
-}
-
 resource "aws_s3_bucket" "codepipeline" {
   bucket = "tf-example-codepipeline"
+
+  tags = {
+    Name = "tf-example-s3-codepipeline"
+  }
 }
 
 resource "aws_s3_bucket_acl" "codepipeline" {

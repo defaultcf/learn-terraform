@@ -27,14 +27,6 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "alb_sg" {
-  type = string
-}
-
-variable "app_server_sg" {
-  type = string
-}
-
 variable "s3_codepipeline" {
   type = string
 }

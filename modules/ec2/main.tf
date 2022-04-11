@@ -13,7 +13,7 @@ resource "aws_launch_configuration" "app_server" {
   image_id                         = data.aws_ami.latest_amazon_linux.id
   instance_type                    = var.instance_type
   iam_instance_profile             = aws_iam_instance_profile.systems_manager.name
-  security_groups                  = [var.app_server_sg]
+  security_groups                  = [aws_security_group.app_server.id]
   vpc_classic_link_security_groups = []
 
   lifecycle {
@@ -49,7 +49,7 @@ resource "aws_autoscaling_group" "app_server" {
 
 resource "aws_lb" "main" {
   name            = "tf-example-alb"
-  security_groups = [var.alb_sg]
+  security_groups = [aws_security_group.alb.id]
   subnets         = [var.public_1, var.public_2]
 
   tags = {

@@ -2,22 +2,6 @@ data "aws_ec2_managed_prefix_list" "cloudfront" {
   name = "com.amazonaws.global.cloudfront.origin-facing"
 }
 
-resource "aws_security_group" "vpc_endpoint" {
-  name   = "endpoint"
-  vpc_id = var.vpc
-
-  ingress {
-    from_port   = 0
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "tf-example-vpc-endpoint-sg"
-  }
-}
-
 resource "aws_security_group" "alb" {
   name   = "alb"
   vpc_id = var.vpc

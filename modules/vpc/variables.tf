@@ -47,7 +47,3 @@ variable "public_2_cidr_block" {
   type    = string
   default = "10.0.200.0/24"
 }
-
-variable "vpc_endpoint_sg" {
-  type = string
-}

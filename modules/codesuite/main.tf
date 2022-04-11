@@ -5,6 +5,10 @@ locals {
 resource "aws_codedeploy_app" "deploy_app" {
   compute_platform = "Server"
   name             = "tf-example-deploy-app"
+
+  tags = {
+    Name = "tf-example-deploy-app"
+  }
 }
 
 resource "aws_codedeploy_deployment_group" "deploy_group" {
@@ -30,11 +34,19 @@ resource "aws_codedeploy_deployment_group" "deploy_group" {
       name = var.lb_target_group_name
     }
   }
+
+  tags = {
+    Name = local.deployment_group_name
+  }
 }
 
 resource "aws_codestarconnections_connection" "github" {
   name          = "tf-example-connection"
   provider_type = "GitHub"
+
+  tags = {
+    Name = "tf-example-connection"
+  }
 }
 
 resource "aws_codepipeline" "codepipeline" {
@@ -80,5 +92,9 @@ resource "aws_codepipeline" "codepipeline" {
         DeploymentGroupName = local.deployment_group_name
       }
     }
+  }
+
+  tags = {
+    Name = "tf-example-pipeline"
   }
 }

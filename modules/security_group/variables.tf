@@ -1,3 +1,0 @@
-variable "vpc" {
-  type = string
-}

@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  app:
+    build: ./docker/php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      DATABASE_URL: mysql://root:password@db/main
+
+  db:
+    image: mariadb:10.6.7
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: main

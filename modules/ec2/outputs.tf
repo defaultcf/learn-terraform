@@ -13,3 +13,7 @@ output "lb_target_group_name" {
 output "autoscaling_group" {
   value = aws_autoscaling_group.app_server.id
 }
+
+output "sg_app_server" {
+  value = aws_security_group.app_server.id
+}
