@@ -12,6 +12,7 @@
           - httpd
           - php-xml
           - ruby
+          - mariadb
         state: present
     - name: enable httpd
       systemd:

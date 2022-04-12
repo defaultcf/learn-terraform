@@ -40,6 +40,7 @@ resource "aws_codedeploy_deployment_group" "deploy_group" {
   }
 }
 
+# TODO: data に書き換えるべき？
 resource "aws_codestarconnections_connection" "github" {
   name          = "tf-example-connection"
   provider_type = "GitHub"

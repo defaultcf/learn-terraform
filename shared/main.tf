@@ -1,9 +1,12 @@
 module "kms" {
-  source = "../../modules/kms"
+  source               = "../../modules/kms"
+  rds_username_payload = local.rds_username_payload
+  rds_password_payload = local.rds_password_payload
 }
 
 module "s3" {
-  source = "../../modules/s3"
+  source               = "../../modules/s3"
+  s3_codepipeline_name = local.s3_codepipeline_name
 }
 
 module "vpc" {

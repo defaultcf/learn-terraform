@@ -18,11 +18,11 @@ data "aws_kms_key" "default" {
 data "aws_kms_secrets" "credentials" {
   secret {
     name    = "rds_username"
-    payload = "AQICAHinIzLBEQGPIQZ8CFx1RFXHMhD0cxaeM/sTLRzXEZKFOQEBK7QyihFcMwCYMnQIE33fAAAAZzBlBgkqhkiG9w0BBwagWDBWAgEAMFEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMUXqWrLfiyxkvpmysAgEQgCTRGjhg0ErgH84hbMPiVwJtFfKh6yd9sMJlPSaTv/4Ulf/++ZE="
+    payload = var.rds_username_payload
   }
 
   secret {
     name    = "rds_password"
-    payload = "AQICAHinIzLBEQGPIQZ8CFx1RFXHMhD0cxaeM/sTLRzXEZKFOQGXzE8QCG/1QgPNCSzUNtWDAAAAczBxBgkqhkiG9w0BBwagZDBiAgEAMF0GCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQM1v6QKU9M+b5Xv82HAgEQgDDELF/N+D2kTkJVi3q8zPgShGbVy7Ny/B8FNyi7DOMn7+47gj27AWnYH2RzdScv5ds="
+    payload = var.rds_password_payload
   }
 }
