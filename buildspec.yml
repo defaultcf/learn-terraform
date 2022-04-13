@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - cd wordpress 
+      - cat .env.private.enc | ./bin/decrypt.sh > .env
+
+artifacts:
+  files:
+    - "**/*"
