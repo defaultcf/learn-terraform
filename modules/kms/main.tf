@@ -11,6 +11,8 @@
 #  target_key_id = aws_kms_key.default.id
 #}
 
+# TODO: キーポリシーでCodeBuildがDecryptできるようにする
+
 data "aws_kms_key" "default" {
   key_id = "alias/tf-example-key"
 }

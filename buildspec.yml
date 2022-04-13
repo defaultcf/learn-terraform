@@ -5,6 +5,7 @@ phases:
     commands:
       - cd wordpress 
       - cat .env.private.enc | ./bin/decrypt.sh > .env
+      - if [ ! -s .env ]; then return 1; fi
 
 artifacts:
   files:

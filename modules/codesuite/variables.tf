@@ -17,3 +17,7 @@ variable "s3_codepipeline" {
 variable "s3_codepipeline_arn" {
   type = string
 }
+
+variable "key_id" {
+  type = string
+}

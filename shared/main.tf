@@ -52,4 +52,5 @@ module "codesuite" {
   lb_target_group_name = module.ec2.lb_target_group_name
   s3_codepipeline      = module.s3.codepipeline
   s3_codepipeline_arn  = module.s3.codepipeline_arn
+  key_id               = module.kms.key_id
 }
