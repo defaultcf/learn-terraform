@@ -3,7 +3,12 @@ version: 0.2
 phases:
   build:
     commands:
+      - amazon-linux-extras install -y php7.4
+      - yum install php-xml
+      - curl -o /usr/local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
+      - chmod +x /usr/local/bin/composer
       - cd wordpress 
+      - /usr/local/bin/composer install
       - cat .env.private.enc | ./bin/decrypt.sh > .env
       - if [ ! -s .env ]; then return 1; fi
 
