@@ -5,6 +5,8 @@ web/app/mu-plugins/*/
 web/app/upgrade
 web/app/uploads/*
 !web/app/uploads/.gitkeep
+web/app/languages/*
+!web/app/languages/.gitkeep
 web/app/cache/*
 
 # WordPress
@@ -16,6 +18,7 @@ web/wp
 # Dotenv
 .env
 .env.*
+!.env.local
 !.env.*.enc
 !.env.example
 
