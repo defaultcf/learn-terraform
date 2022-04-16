@@ -30,7 +30,8 @@ data "aws_iam_policy_document" "codebuild_policy" {
   statement {
     actions = [
       "logs:CreateLogStream",
-      "logs:CreateLogGroup"
+      "logs:CreateLogGroup",
+      "logs:PutLogEvents"
     ]
     resources = ["arn:aws:logs:*:*:log-group:/aws/codebuild/*"]
   }
