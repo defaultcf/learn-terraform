@@ -18,7 +18,7 @@ web/wp
 # Dotenv
 .env
 .env.*
-!.env.local
+!.env.dev
 !.env.*.enc
 !.env.example
 

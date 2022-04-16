@@ -81,7 +81,7 @@
   },
   "scripts": {
     "post-root-package-install": [
-      "php -r \"copy('.env.local', '.env');\""
+      "php -r \"copy('.env.dev', '.env');\""
     ],
     "test": [
       "phpcs"
