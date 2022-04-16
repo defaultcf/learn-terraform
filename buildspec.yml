@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - PYTHON=python2 amazon-linux-extras install -y php7.4
-      - yum install php-xml
+      - yum install -y php-xml
       - curl -o /usr/local/bin/composer https://getcomposer.org/download/latest-stable/composer.phar
       - chmod +x /usr/local/bin/composer
       - cd wordpress 
