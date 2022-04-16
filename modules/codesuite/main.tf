@@ -93,7 +93,7 @@ resource "aws_codepipeline" "codepipeline" {
 
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.github.arn
-        FullRepositoryId = "defaultcf/learn-terraform"
+        FullRepositoryId = "defaultcf/learn-wordpress"
         BranchName       = "main"
       }
     }
