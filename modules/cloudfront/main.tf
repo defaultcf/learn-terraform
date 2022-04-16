@@ -30,15 +30,19 @@ resource "aws_cloudfront_distribution" "main" {
     viewer_protocol_policy = "redirect-to-https"
     allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods         = ["GET", "HEAD"]
+    min_ttl                = 0
+    default_ttl            = 3600
+    max_ttl                = 86400
 
     #cache_policy_id          = data.aws_cloudfront_cache_policy.caching_optimized.id
     #origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
 
     forwarded_values {
-      query_string = false
+      headers      = ["Accept", "Authorization", "Host", "Referer", "CloudFront-Forwarded-Proto"]
+      query_string = true
 
       cookies {
-        forward = "none"
+        forward = "all"
       }
     }
   }

@@ -46,10 +46,10 @@ resource "aws_codedeploy_deployment_group" "deploy_group" {
     events  = ["DEPLOYMENT_FAILURE"]
   }
 
-  deployment_style {
-    deployment_option = "WITH_TRAFFIC_CONTROL"
-    deployment_type   = "IN_PLACE"
-  }
+  #deployment_style {
+  #  deployment_option = "WITH_TRAFFIC_CONTROL"
+  #  deployment_type   = "IN_PLACE"
+  #}
 
   load_balancer_info {
     target_group_info {
